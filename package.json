@@ -1,0 +1,28 @@
+{
+  "name": "@diffusionstudio/ffmpeg-wasm",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": false,
+  "description": "FFmpeg LGPL v2.1 build steps for generating a wasm module using emscripten.",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/ffmpeg.js",
+  "module": "./dist/ffmpeg.js",
+  "scripts": {
+    "dev:docker:arm64": "docker-compose down dev-web-demuxer-arm64 && docker-compose up dev-web-demuxer-arm64 -d",
+    "make:ffmpeg-lib": "docker exec -it web-demuxer make ffmpeg-lib",
+    "make:web-demuxer": "docker exec -it web-demuxer make web-demuxer",
+    "build:wasm": "npm run make:ffmpeg-lib && npm run make:web-demuxer",
+    "stop": "docker-compose down"
+  },
+  "author": "Diffusion Studio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diffusion-studio/ffmpeg-wasm"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
